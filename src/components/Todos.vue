@@ -14,7 +14,7 @@
           v-if="!todo.editing"
           class="todoLabel"
           v-on:dblclick="editing(todo)"
-          v-bind:class="{ completed : todo.completed }"
+          v-bind:class="{ completed: todo.completed }"
         >
           {{ todo.title }}
         </div>
@@ -31,11 +31,13 @@
         <i class="el-icon-delete"></i>
       </div>
     </div>
-    <hr>
+    <hr />
     <el-checkbox v-on:change="selectAll">Select All</el-checkbox>
-    <br>
-    <br>
-    <el-button type="danger" v-on:click="clearSelected">Clear Completed</el-button>
+    <br />
+    <br />
+    <el-button type="danger" v-on:click="clearSelected"
+      >Clear Completed</el-button
+    >
   </div>
 </template>
 
@@ -78,9 +80,9 @@ export default {
   directives: {
     focus: {
       inserted: function (el) {
-        el.focus()
-      }
-    }
+        el.focus();
+      },
+    },
   },
 
   methods: {
@@ -110,12 +112,12 @@ export default {
     },
 
     selectAll() {
-      this.todos.forEach((todo) => todo.completed = event.target.checked)
+      this.todos.forEach((todo) => (todo.completed = event.target.checked));
     },
 
     clearSelected() {
-      this.todos = this.todos.filter(todo => !todo.completed)
-    }
+      this.todos = this.todos.filter((todo) => !todo.completed);
+    },
   },
 };
 </script>
@@ -171,6 +173,6 @@ export default {
 
 .completed {
   text-decoration: line-through;
-  color: green;
+  color: red;
 }
 </style>
