@@ -32,7 +32,7 @@
       </div>
     </div>
     <hr />
-    <el-checkbox v-on:change="selectAll">Select All</el-checkbox>
+    <el-checkbox v-model="checked" v-on:change="selectAll">Select All</el-checkbox>
     <br />
     <br />
     <el-button type="danger" v-on:click="clearSelected"
@@ -48,6 +48,7 @@ export default {
     return {
       inputTodo: "",
       id: 5,
+      checked: false,
       todos: [
         {
           id: 1,
@@ -117,6 +118,7 @@ export default {
 
     clearSelected() {
       this.todos = this.todos.filter((todo) => !todo.completed);
+      this.checked = false
     },
   },
 };
