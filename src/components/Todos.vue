@@ -7,7 +7,11 @@
       v-model="inputTodo"
       v-on:keyup.enter.native="addTodo"
     ></el-input>
-    <div v-for="(todo, index) in this.$store.state.todos" v-bind:key="todo.id" class="todos">
+    <div
+      v-for="(todo, index) in todos"
+      v-bind:key="todo.id"
+      class="todos"
+    >
       <div class="todoItem">
         <el-checkbox v-model="todo.completed"></el-checkbox>
         <div
@@ -32,7 +36,9 @@
       </div>
     </div>
     <hr />
-    <el-checkbox v-model="checked" v-on:change="selectAll">Select All</el-checkbox>
+    <el-checkbox v-model="checked" v-on:change="selectAll"
+      >Select All</el-checkbox
+    >
     <br />
     <br />
     <el-button type="danger" v-on:click="clearSelected"
@@ -49,9 +55,34 @@ export default {
       inputTodo: "",
       id: 5,
       checked: false,
+      todos: [
+        {
+          id: 1,
+          title: "Add a new todo",
+          completed: false,
+          editing: false,
+        },
+        {
+          id: 2,
+          title: "Edit a todo by double clicking on it",
+          completed: false,
+          editing: false,
+        },
+        {
+          id: 3,
+          title: "Remove a todo by clicking the trash icon",
+          completed: false,
+          editing: false,
+        },
+        {
+          id: 4,
+          title: "Remove all todos by selecting all",
+          completed: false,
+          editing: false,
+        },
+      ],
     };
   },
-
   directives: {
     focus: {
       inserted: function (el) {
@@ -65,18 +96,18 @@ export default {
       if (this.inputTodo.length == 0) {
         return alert("Enter a Todo to Add");
       }
-      this.$store.state.todos.push({
+      this.todos.push({
         id: this.id,
         title: this.inputTodo,
         completed: false,
-        editing: false
+        editing: false,
       });
       this.inputTodo = "";
       this.id++;
     },
 
     deleteTodo(index) {
-      this.$store.state.todos.splice(index, 1);
+      this.todos.splice(index, 1);
     },
 
     editing(todo) {
@@ -88,12 +119,16 @@ export default {
     },
 
     selectAll() {
-      this.$store.state.todos.forEach((todo) => (todo.completed = event.target.checked));
+      this.todos.forEach(
+        (todo) => (todo.completed = event.target.checked)
+      );
     },
 
     clearSelected() {
-      this.$store.state.todos = this.$store.state.todos.filter((todo) => !todo.completed);
-      this.checked = false
+      this.todos = this.todos.filter(
+        (todo) => !todo.completed
+      );
+      this.checked = false;
     },
   },
 };
